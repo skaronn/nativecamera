@@ -13,6 +13,17 @@ import openfl.utils.JNI;
 
 class NativeCamera {
 	
+	public static function Initialize() : Void
+    {
+		
+	}
+	
+	public static function TakePhoto() : Void
+    {
+		
+	}
+	
+	/*
 	
 	public static function sampleMethod (inputValue:Int):Int {
 		
@@ -44,5 +55,5 @@ class NativeCamera {
 	private static var nativecamera_sample_method_jni = JNI.createStaticMethod ("org.haxe.extension.NativeCamera", "sampleMethod", "(I)I");
 	#end
 	
-	
+	*/
 }

@@ -1,10 +1,20 @@
-#include "Utils.h"
-
+#include "NativeCamera.h"
 
 namespace nativecamera {
+		
+	int getDeviceNumber() {		
+		return 123456789;		
+	}
 	
-	int SampleMethod(int inputValue) {		
-		return inputValue * 100;		
-	}	
+	void initialize() {				
+	}
+	
+	bool takePhoto(int maxPixelSize, float jpegQuality, const char* cameraOverlayFile) {		
+		return true;
+	}
+	
+	bool takeVideo() {
+		return true;
+	}
 	
 }
