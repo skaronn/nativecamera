@@ -2,10 +2,14 @@
 #define DEVICE_H
 
 #include <string>
+using namespace std;
+using std::string;
 
 namespace nativecamera {
-	std::string GetData();
-	std::string GetResolution();
+
+	std::string getWindowsDeviceIdentifier();
+	std::string initializeWindowsCamera();
+
 }
 
 #endif

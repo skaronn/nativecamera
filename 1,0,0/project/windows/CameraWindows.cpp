@@ -8,24 +8,24 @@
 #include <comip.h>
 #include <comdefsp.h>
 #include <dshow.h>
-#include <string>
 #include <vector>
 
-#pragma comment(lib,"strmiids.lib") 
-using std::string;
+#pragma comment(lib,"strmiids.lib")
+
+#include <string>
 using namespace std;
+using std::string;
 
 namespace nativecamera {
 
-	std::string GetData()
+	std::string getWindowsDeviceIdentifier()
 	{
-		std::string result = "Message from webcam.";
-		return result;
+		std::string deviceIdentifier = "Webcam device identifier";
+		return deviceIdentifier;
 	}
 
-	std::string GetResolution()
+	std::string initializeWindowsCamera()
 	{
-
 		HRESULT hr;
 
 		ICreateDevEnum *pSysDevices = NULL;

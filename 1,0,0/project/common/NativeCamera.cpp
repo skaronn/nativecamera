@@ -2,22 +2,30 @@
 #include "../iphone/CameraIPhone.h"
 #include "../windows/CameraWindows.h"
 
+#include <string>
+using namespace std;
+using std::string;
+
 namespace nativecamera {
 		
 	const char* getDeviceIdentifier() {
-		const char* deviceNumber = "0123456789";
-		#ifdef IPHONE
+		std::string deviceNumber = "XXXXX-0123456789";
+		#ifdef HX_WINDOWS
+		deviceNumber = getWindowsDeviceIdentifier();
+		#elif IPHONE
         deviceNumber = iphone::getDeviceNumber();
         #endif
-		return deviceNumber;		
+		return deviceNumber.c_str();		
 	}
 	
-	void initialize() {	
+	const char* initialize() {	
+		std::string data;
 		#ifdef HX_WINDOWS
-		std::string GetResolution();
+		data = initializeWindowsCamera();
 		#elif IPHONE
-        iphone::initialize();
+        iphone::initializeIphoneCamera();
         #endif
+		return data.c_str();
 	}
 	
 	bool takePhoto(int maxPixelSize, float jpegQuality, const char* cameraOverlayFile) {		

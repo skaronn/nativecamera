@@ -18,8 +18,8 @@
   <classpaths>
     <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,1" />
     <class path="C:\HaxeToolkit\haxe\lib\nativecamera\1,0,0" />
-    <class path="Source" />
     <class path="C:\HaxeToolkit\haxe\lib\openfl\2,0,1\backends\native" />
+    <class path="Source" />
     <class path="Export\windows\cpp\haxe" />
   </classpaths>
   <!-- Build options -->

@@ -63,7 +63,7 @@ References
 
 ###License
 
-The MIT License (MIT) - [LICENSE.md](LICENSE.md)
+The MIT License (MIT) - [1,0,0/LICENSE.md](LICENSE.md)
 
 Copyright &copy; 2015
 

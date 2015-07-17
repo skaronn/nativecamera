@@ -9,6 +9,10 @@
 #include <hx/CFFI.h>
 #include "NativeCamera.h"
 
+#include <string>
+using namespace std;
+using std::string;
+
 using namespace nativecamera;
 
 static value nativecamera_device_identifier() {
@@ -16,8 +20,8 @@ static value nativecamera_device_identifier() {
 }
 DEFINE_PRIM (nativecamera_device_identifier, 0);
 
-static void nativecamera_initialize() {
-	initialize();
+static value nativecamera_initialize() {
+	return alloc_string(initialize());
 }
 DEFINE_PRIM (nativecamera_initialize, 0);
 /*
@@ -25,14 +29,13 @@ static value nativecamera_take_photo(value maxPixelSize, value jpegQuality, valu
 {
     return alloc_bool(takePhoto(val_int(maxPixelSize), (float) val_float(jpegQuality), val_string(cameraOverlayFile)));
 }
-DEFINE_PRIM(nativecamera_take_photo, 3);
+DEFINE_PRIM (nativecamera_take_photo, 3);
 
 static value nativecamera_take_video() {
 {
     return alloc_bool(takeVideo());
 }
-DEFINE_PRIM(nativecamera_take_video, 0);
-
+DEFINE_PRIM (nativecamera_take_video, 0);
 
 extern "C" void nativecamera_main () {
 	

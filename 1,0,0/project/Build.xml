@@ -2,15 +2,36 @@
 	
 	<include name="${HXCPP}/build-tool/BuildCommon.xml"/>
 	
-	<files id="common">
-		
-		<compilerflag value="-Iinclude"/>
-		
+	<set name="mobile" value="1" if="iphone"/>
+	<set name="mobile" value="1" if="android"/>
+	<set name="mobile" value="1" if="blackberry"/>
+	<set name="mobile" value="1" if="webos"/>
+	
+	<files id="common">		
+		<compilerflag value="-Iinclude"/>		
 		<file name="common/ExternalInterface.cpp"/>
-		<file name="common/NativeCamera.cpp"/>
-		
+		<file name="common/NativeCamera.cpp"/>		
 	</files>
 	
+	<!-- When compiling for Windows purpose -->
+	<files id="windows">
+		<file name="windows/CameraWindows.cpp"/>
+	</files>
+	
+	<!-- When compiling for Iphone purpose -->
+	<files id="iphone">
+		<file name="iphone/CameraIPhone.cpp"/>
+	</files>
+		
+	<set name="name_prefix" value="lib" if="iphone"/>
+	<set name="IOS_ARCH" value="-v7" if="HXCPP_ARMV7"/>
+	<set name="name_extra" value=".iphoneos${IOS_ARCH}" if="iphoneos"/>
+	<set name="name_extra" value=".iphonesim" if="iphonesim"/>
+	<set name="name_extra" value="-x86" if="simulator" unless="iphonesim" />
+	<set name="tool" value="exe" unless="iphone"/>
+	<set name="tool" value="static_link" if="iphone"/>
+	<set name="ndll-tool" value="dll" unless="iphone"/>
+	<set name="ndll-tool" value="static_link" if="iphone"/>
 	<set name="SLIBEXT" value=".lib" if="windows"/>
 	<set name="SLIBEXT" value=".a" unless="windows"/>
 	<set name="SLIBEXT" value=".so" if="webos"/>
@@ -20,8 +41,17 @@
 	<target id="NDLL" output="${LIBPREFIX}nativecamera${MSVC_LIB_VERSION}${DEBUGEXTRA}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
 		
 		<outdir name="../ndll/${BINDIR}"/>
-		<ext value=".ndll" if="windows || mac || linux"/>
+		<!--<ext value=".ndll" if="windows || mac || linux"/>-->
+		<ext value=".ndll" unless="mobile"/>
 		<files id="common"/>
+		
+		<!-- Compile the right files depending of current target platform -->
+		<files id="mac" if="mac"/>
+		<files id="iphone" if="iphone"/>
+		<files id="android" if="android"/>
+		<files id="windows" if="windows"/>
+		
+		<lib name="lib/strmiids.lib" if="windows"/>
 		
 	</target>
 	

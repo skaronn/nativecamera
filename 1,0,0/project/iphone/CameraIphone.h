@@ -6,7 +6,7 @@ namespace nativecamera
     namespace iphone
     {
         int getDeviceNumber();
-		void initialize();
+		void initializeIphoneCamera();
         bool takePhoto(int maxPixelSize, float jpegQuality, const char* cameraOverlayFile);
 		bool takeVideo();
     }

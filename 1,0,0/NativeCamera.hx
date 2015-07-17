@@ -13,6 +13,9 @@ import openfl.utils.JNI;
 
 class NativeCamera {
 	
+	private static var cameraDeviceID = Dynamic;
+	private static var cameraVideoData = Dynamic;
+	
 	/**
 	 * 
 	 */
@@ -22,18 +25,18 @@ class NativeCamera {
 		#if flash
 		identifier = Std.string(flash.media.Camera.names[0]);
 		#elseif android
-		identifier = Std.string(JNI.createStaticMethod("org.haxe.extension.NativeCamera", "getDeviceIdentifier", "()Ljava/lang/String;"));
-		#elseif windows
-		var device_number = Lib.load("nativecamera", "nativecamera_device_identifier", 0);
-		identifier = Std.string(device_number);
+		cameraDeviceID = JNI.createStaticMethod("org.haxe.extension.NativeCamera", "getDeviceIdentifier", "()Ljava/lang/String;");
+		#elseif (windows || cpp)
+		cameraDeviceID = Lib.load("nativecamera", "nativecamera_device_identifier", 0);
 		#end
+		identifier = Std.string(cameraDeviceID);
 		return identifier;
 	}
 	
 	/**
 	 * 
 	 */
-	public static function Initialize() : Void
+	public static function Initialize() : String
     {
 		#if flash
 		var mc : openfl.display.MovieClip ;
@@ -53,9 +56,14 @@ class NativeCamera {
 			trace("w=" + cam.width + ", h=" + cam.height + ", fps=" + cam.fps);
 		}
 		else {
-			trace("No Camera") ;
-		}		
+			trace("No Camera");
+		}
+		#elseif android
+		cameraVideoData = JNI.createStaticMethod("org.haxe.extension.NativeCamera", "initialize", "()Ljava/lang/String;"));		
+		#elseif (windows || cpp)
+		cameraVideoData = Lib.load("nativecamera", "nativecamera_initialize", 0);
 		#end
+		return Std.string(cameraVideoData);
 	}
 	
 	/**
