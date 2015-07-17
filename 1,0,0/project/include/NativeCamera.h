@@ -2,10 +2,12 @@
 #define NATIVECAMERA_H
 
 namespace nativecamera {
-	int getDeviceNumber();
+	const char* getDeviceIdentifier();
 	void initialize();
+	/*
 	bool takePhoto(int maxPixelSize, float jpegQuality, const char* cameraOverlayFile);
 	bool takeVideo();
+	*/
 }
 
 

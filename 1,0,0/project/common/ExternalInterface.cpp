@@ -11,17 +11,16 @@
 
 using namespace nativecamera;
 
-static value nativecamera_device_number() {
-	int returnValue = getDeviceNumber();
-	return alloc_int(returnValue);
+static value nativecamera_device_identifier() {
+	return alloc_string(getDeviceIdentifier());
 }
-DEFINE_PRIM (nativecamera_device_number, 0);
+DEFINE_PRIM (nativecamera_device_identifier, 0);
 
-static value nativecamera_initialize() {
+static void nativecamera_initialize() {
 	initialize();
 }
 DEFINE_PRIM (nativecamera_initialize, 0);
-
+/*
 static value nativecamera_take_photo(value maxPixelSize, value jpegQuality, value cameraOverlayFile) 
 {
     return alloc_bool(takePhoto(val_int(maxPixelSize), (float) val_float(jpegQuality), val_string(cameraOverlayFile)));
@@ -34,14 +33,13 @@ static value nativecamera_take_video() {
 }
 DEFINE_PRIM(nativecamera_take_video, 0);
 
-/*
+
 extern "C" void nativecamera_main () {
 	
 	val_int(0); // Fix Neko init
 	
 }
 DEFINE_ENTRY_POINT (nativecamera_main);
-
 
 extern "C" int nativecamera_register_prims () { return 0; }
 */

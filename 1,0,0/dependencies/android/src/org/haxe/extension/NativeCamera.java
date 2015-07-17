@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-
 /* 
 	You can use the Android Extension class in order to hook
 	into the Android activity lifecycle. This is not required
@@ -38,13 +37,11 @@ import android.view.View;
 */
 public class NativeCamera extends Extension {
 	
-	public static String getNativeCameraIdentifier() {
-        return "ANDROID_ID-XXXXXXX"; 
+	public static String getDeviceIdentifier() {
+        String deviceIdentifier = "ANDROID CAMERA DEVICE";
+        //android.hardware.Camera.getCameraInfo(0, new android.hardware.CameraInfo());
+		return deviceIdentifier;
     }
-	
-	public static int sampleMethod (int inputValue) {		
-		return inputValue * 100;		
-	}	
 	
 	/**
 	 * Called when an activity you launched exits, giving you the requestCode 

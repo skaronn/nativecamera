@@ -119,16 +119,6 @@ namespace nativecamera {
 		wprintf(L"Capturing...");
 		
 		std::string result = "yes ?";
-		
-		/*
-		std::stringstream ss;
-		ss <<  "width : ";
-		ss << width;
-		ss <<  " height : ";
-		ss << height;
-		std::string result = ss.str();
-		std::cout << result;
-		*/
 
 		return result;
 	}
