@@ -10,7 +10,6 @@ import neko.Lib;
 import openfl.utils.JNI;
 #end
 
-
 class NativeCamera {
 	
 	private static var cameraDeviceID = Dynamic;
@@ -24,8 +23,8 @@ class NativeCamera {
 		var identifier : String = "";
 		#if flash
 		identifier = Std.string(flash.media.Camera.names[0]);
-		#elseif android
-		cameraDeviceID = JNI.createStaticMethod("org.haxe.extension.NativeCamera", "getDeviceIdentifier", "()Ljava/lang/String;");
+		#elseif android		
+		cameraDeviceID = JNI.createStaticMethod("org.haxe.extension.hardware.NativeCamera", "getDeviceIdentifier", "()Ljava/lang/String;");
 		#elseif (windows || cpp)
 		cameraDeviceID = Lib.load("nativecamera", "nativecamera_device_identifier", 0);
 		#end
@@ -59,7 +58,7 @@ class NativeCamera {
 			trace("No Camera");
 		}
 		#elseif android
-		cameraVideoData = JNI.createStaticMethod("org.haxe.extension.NativeCamera", "initialize", "()Ljava/lang/String;"));		
+		cameraVideoData = JNI.createStaticMethod("org.haxe.extension.hardware.NativeCamera", "initialize", "()Ljava/lang/String;");		
 		#elseif (windows || cpp)
 		cameraVideoData = Lib.load("nativecamera", "nativecamera_initialize", 0);
 		#end

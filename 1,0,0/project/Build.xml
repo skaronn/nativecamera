@@ -41,15 +41,14 @@
 	<target id="NDLL" output="${LIBPREFIX}nativecamera${MSVC_LIB_VERSION}${DEBUGEXTRA}${LIBEXTRA}" tool="linker" toolid="${STD_MODULE_LINK}">
 		
 		<outdir name="../ndll/${BINDIR}"/>
-		<!--<ext value=".ndll" if="windows || mac || linux"/>-->
 		<ext value=".ndll" unless="mobile"/>
 		<files id="common"/>
 		
-		<!-- Compile the right files depending of current target platform -->
+		<!-- Compile the right files depending of current target platform 
 		<files id="mac" if="mac"/>
 		<files id="iphone" if="iphone"/>
 		<files id="android" if="android"/>
-		<files id="windows" if="windows"/>
+		<files id="windows" if="windows"/>-->
 		
 		<lib name="lib/strmiids.lib" if="windows"/>
 		

@@ -1,4 +1,4 @@
-package org.haxe.extension;
+package org.haxe.extension.hardware;
 
 
 import android.app.Activity;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.hardware.Camera;
 
 /* 
 	You can use the Android Extension class in order to hook
@@ -35,13 +36,45 @@ import android.view.View;
 	function for performing a single task, like returning a value
 	back to Haxe from Java.
 */
-public class NativeCamera extends Extension {
+public class NativeCamera extends org.haxe.Extension {
+	
+	private Camera mCamera = null;
+	private boolean qOpened = false;
 	
 	public static String getDeviceIdentifier() {
         String deviceIdentifier = "ANDROID CAMERA DEVICE";
         //android.hardware.Camera.getCameraInfo(0, new android.hardware.CameraInfo());
 		return deviceIdentifier;
     }
+	
+	public static String initialize() {
+        String deviceIdentifier = "ANDROID CAMERA INITIALIZE";
+		safeCameraOpen(0);
+		return deviceIdentifier;
+    }
+	
+	private boolean safeCameraOpen(int id) {
+		boolean qOpened = false;
+	  
+		try {
+			releaseCameraAndPreview();
+			mCamera = Camera.open(id);
+			qOpened = (mCamera != null);
+		} catch (Exception e) {
+			Log.e(getString(R.string.app_name), "failed to open Camera");
+			e.printStackTrace();
+		}
+
+		return qOpened;    
+	}
+
+	private void releaseCameraAndPreview() {
+		mPreview.setCamera(null);
+		if (mCamera != null) {
+			mCamera.release();
+			mCamera = null;
+		}
+	}
 	
 	/**
 	 * Called when an activity you launched exits, giving you the requestCode 

@@ -10,6 +10,13 @@
 	<assets path="Assets" rename="assets" exclude="openfl.svg" />
 	<icon path="Assets/openfl.svg" />
 	
+	<!-- Fix emulated SD card issues-->
+	<set name="ANDROID_INSTALL_LOCATION" value="auto" />
+	
+	<android target-sdk-version="22" />
+	
+	<!--<haxedef name="openfl-legacy" />-->
+	
 	<source path="Source" />
 	
 </project>
